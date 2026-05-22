@@ -2195,3 +2195,14 @@ def test_dashboard_failed_card_highlight_class_exists():
     assert "hermes-kanban-card--failed" in js
     assert "hermes-kanban-card--failed" in css
     assert "failedIds" in js
+
+
+def test_kanban_guidance_includes_attachment_note():
+    """KANBAN_GUIDANCE must instruct workers to inspect task attachments
+    (screenshots, logs, diagrams) via downloadUrl."""
+    from agent.prompt_builder import KANBAN_GUIDANCE
+
+    assert "Attachments" in KANBAN_GUIDANCE
+    assert "task.attachments" in KANBAN_GUIDANCE
+    assert "downloadUrl" in KANBAN_GUIDANCE
+    assert "screenshots" in KANBAN_GUIDANCE or "attachments" in KANBAN_GUIDANCE
